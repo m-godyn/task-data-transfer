@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-import pl.milgodyn.taskdatatransfer.application.exception.ErrorType;
+import pl.milgodyn.taskdatatransfer.application.exception.ApiErrors;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -42,7 +42,7 @@ public class CoordinatesControllerIT {
                         get(COORDINATES_REQUEST_PATH + invalidCountryCode)
                 )
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.error", is(ErrorType.INVALID_COUNTRY_CODE.name())))
+                .andExpect(jsonPath("$.error", is(ApiErrors.INVALID_COUNTRY_CODE.name())))
                 .andExpect(jsonPath("$.message", is("Invalid country code: " + invalidCountryCode)));
     }
 }
