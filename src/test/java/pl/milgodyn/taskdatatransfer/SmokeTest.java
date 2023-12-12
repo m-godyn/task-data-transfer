@@ -3,7 +3,7 @@ package pl.milgodyn.taskdatatransfer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.milgodyn.taskdatatransfer.application.CoordinatesController;
+import pl.milgodyn.taskdatatransfer.application.rest.CoordinatesController;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
