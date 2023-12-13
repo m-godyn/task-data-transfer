@@ -1,4 +1,4 @@
-package pl.milgodyn.taskdatatransfer.domain;
+package pl.milgodyn.taskdatatransfer.domain.model;
 
 public enum CountryCode {
     AD,

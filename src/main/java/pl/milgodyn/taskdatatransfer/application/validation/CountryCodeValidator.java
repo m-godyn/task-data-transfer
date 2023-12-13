@@ -2,7 +2,7 @@ package pl.milgodyn.taskdatatransfer.application.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import pl.milgodyn.taskdatatransfer.domain.CountryCode;
+import pl.milgodyn.taskdatatransfer.domain.model.CountryCode;
 
 import java.util.Arrays;
 

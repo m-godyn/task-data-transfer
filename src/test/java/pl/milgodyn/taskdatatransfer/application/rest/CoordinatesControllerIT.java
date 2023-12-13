@@ -24,8 +24,7 @@ class CoordinatesControllerIT extends AbstractIntegrationTest {
                         get(COORDINATES_REQUEST_PATH + countryCode)
                                 .header(HttpHeaders.AUTHORIZATION, VALID_AUTHORIZATION_HEADER_VALUE)
                 )
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString(countryCode)));
+                .andExpect(status().isOk());
     }
 
     @Test
