@@ -2,6 +2,7 @@ package pl.milgodyn.taskdatatransfer.application.rest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import pl.milgodyn.taskdatatransfer.AbstractIntegrationTest;
 import pl.milgodyn.taskdatatransfer.application.exception.ApiErrors;
 
@@ -24,7 +25,8 @@ class CoordinatesControllerIT extends AbstractIntegrationTest {
                         get(COORDINATES_REQUEST_PATH + countryCode)
                                 .header(HttpHeaders.AUTHORIZATION, VALID_AUTHORIZATION_HEADER_VALUE)
                 )
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
     }
 
     @Test
