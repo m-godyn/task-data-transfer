@@ -1,4 +1,6 @@
 package pl.milgodyn.taskdatatransfer.application.response;
 
-public record ApiErrorResponse(int code, String message) {
+import java.time.LocalDateTime;
+
+public record ApiErrorResponse(LocalDateTime timestamp, int status, String error, String path   ) {
 }

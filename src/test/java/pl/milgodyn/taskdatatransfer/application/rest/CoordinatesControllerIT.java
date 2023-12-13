@@ -1,23 +1,18 @@
-package pl.milgodyn.taskdatatransfer.application;
+package pl.milgodyn.taskdatatransfer.application.rest;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.http.HttpHeaders;
+import pl.milgodyn.taskdatatransfer.AbstractIntegrationTest;
 import pl.milgodyn.taskdatatransfer.application.exception.ApiErrors;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
-public class CoordinatesControllerIT {
-
-    private static final String COORDINATES_REQUEST_PATH = "/v1/coordinates/";
-
-    @Autowired
-    private MockMvc mockMvc;
+class CoordinatesControllerIT extends AbstractIntegrationTest {
 
     @Test
     void shouldReturn200() throws Exception {
@@ -27,6 +22,7 @@ public class CoordinatesControllerIT {
         // expect
         mockMvc.perform(
                         get(COORDINATES_REQUEST_PATH + countryCode)
+                                .header(HttpHeaders.AUTHORIZATION, VALID_AUTHORIZATION_HEADER_VALUE)
                 )
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(countryCode)));
@@ -40,9 +36,10 @@ public class CoordinatesControllerIT {
         // expect
         mockMvc.perform(
                         get(COORDINATES_REQUEST_PATH + invalidCountryCode)
+                                .header(HttpHeaders.AUTHORIZATION, VALID_AUTHORIZATION_HEADER_VALUE)
                 )
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.error", is(ApiErrors.INVALID_COUNTRY_CODE.name())))
-                .andExpect(jsonPath("$.message", is("Invalid country code: " + invalidCountryCode)));
+                .andExpect(jsonPath("$.error", is(ApiErrors.INVALID_COUNTRY_CODE.getMessage())))
+                .andExpect(jsonPath("$.path", is(COORDINATES_REQUEST_PATH + invalidCountryCode)));
     }
 }
