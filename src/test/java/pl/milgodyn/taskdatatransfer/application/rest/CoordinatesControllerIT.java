@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import pl.milgodyn.taskdatatransfer.AbstractIntegrationTest;
 import pl.milgodyn.taskdatatransfer.application.exception.ApiErrors;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

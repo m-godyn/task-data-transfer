@@ -8,7 +8,6 @@ import pl.milgodyn.taskdatatransfer.domain.model.Coordinates;
 
 import java.math.BigDecimal;
 
-@Service
 @RequiredArgsConstructor
 public class CityService {
 
