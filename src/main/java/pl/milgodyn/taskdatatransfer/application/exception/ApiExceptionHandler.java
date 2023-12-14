@@ -11,8 +11,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import pl.milgodyn.taskdatatransfer.application.response.ApiErrorResponse;
 
 import java.time.LocalDateTime;
-
-import static pl.milgodyn.taskdatatransfer.application.exception.ApiErrors.INVALID_COUNTRY_CODE;
+import java.util.concurrent.TimeoutException;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
@@ -27,7 +26,37 @@ public final class ApiExceptionHandler {
                         new ApiErrorResponse(
                                 LocalDateTime.now(),
                                 HttpStatus.BAD_REQUEST.value(),
-                                INVALID_COUNTRY_CODE.getMessage(),
+                                "Invalid or no existent country code was given",
+                                request.getRequest().getRequestURI()
+                        )
+                );
+    }
+
+    @ExceptionHandler(CapitalCityNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleCapitalCityNotFoundException(CapitalCityNotFoundException e, ServletWebRequest request) {
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_GATEWAY)
+                .body(
+                        new ApiErrorResponse(
+                                LocalDateTime.now(),
+                                HttpStatus.BAD_GATEWAY.value(),
+                                e.getMessage(),
+                                request.getRequest().getRequestURI()
+                        )
+                );
+    }
+
+    @ExceptionHandler(TimeoutException.class)
+    public ResponseEntity<ApiErrorResponse> handleTimeoutException(ServletWebRequest request) {
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_GATEWAY)
+                .body(
+                        new ApiErrorResponse(
+                                LocalDateTime.now(),
+                                HttpStatus.BAD_GATEWAY.value(),
+                                "External service is unavailable",
                                 request.getRequest().getRequestURI()
                         )
                 );

@@ -5,6 +5,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import pl.milgodyn.taskdatatransfer.application.exception.CapitalCityNotFoundException;
 
 import java.util.List;
 
@@ -25,6 +26,6 @@ public class CoordinatesClient {
 
         return responseList.stream()
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Capital city was not found"));
+                .orElseThrow(CapitalCityNotFoundException::new);
     }
 }
