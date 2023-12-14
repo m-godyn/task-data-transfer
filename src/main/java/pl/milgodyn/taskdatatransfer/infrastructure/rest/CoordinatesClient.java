@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import pl.milgodyn.taskdatatransfer.application.exception.CapitalCityNotFoundException;
 
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public class CoordinatesClient {
@@ -23,6 +24,7 @@ public class CoordinatesClient {
         );
 
         List<CoordinatesClientResponse> responseList = response.getBody();
+        responseList = Objects.requireNonNullElse(responseList, List.of());
 
         return responseList.stream()
                 .findFirst()

@@ -2,6 +2,8 @@ package pl.milgodyn.taskdatatransfer.infrastructure.service;
 
 import lombok.RequiredArgsConstructor;
 import pl.milgodyn.taskdatatransfer.application.exception.CapitalCityNotFoundException;
+import pl.milgodyn.taskdatatransfer.application.utils.LogExecutionTime;
+import pl.milgodyn.taskdatatransfer.application.utils.LogInputAndOutput;
 import pl.milgodyn.taskdatatransfer.domain.service.CapitalCityService;
 import pl.milgodyn.taskdatatransfer.infrastructure.soap.CapitalCityClient;
 
@@ -14,6 +16,8 @@ public class CapitalCityServiceImpl implements CapitalCityService {
     private final CapitalCityClient capitalCityClient;
 
     @Override
+    @LogExecutionTime
+    @LogInputAndOutput
     public String getCapitalCityByCountryCode(String countryCode) {
         String capitalCity = capitalCityClient.getCapitalCity(countryCode).getCapitalCityResult();
         if (INVALID_VALUES.contains(capitalCity)) {
