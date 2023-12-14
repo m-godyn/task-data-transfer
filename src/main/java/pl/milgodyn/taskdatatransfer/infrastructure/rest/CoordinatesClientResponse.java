@@ -8,7 +8,7 @@ import lombok.Value;
 @Value
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CoordinatesResponse {
+public class CoordinatesClientResponse {
 
     String lat;
     String lon;

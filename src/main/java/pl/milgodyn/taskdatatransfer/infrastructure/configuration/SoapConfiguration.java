@@ -1,8 +1,9 @@
-package pl.milgodyn.taskdatatransfer.infrastructure.soap;
+package pl.milgodyn.taskdatatransfer.infrastructure.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import pl.milgodyn.taskdatatransfer.infrastructure.soap.CapitalCityClient;
 
 @Configuration
 public class SoapConfiguration {

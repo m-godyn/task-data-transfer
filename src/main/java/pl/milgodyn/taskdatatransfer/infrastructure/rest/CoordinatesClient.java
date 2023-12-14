@@ -14,14 +14,14 @@ public class CoordinatesClient {
     private static final String API_URL = "https://nominatim.openstreetmap.org/?addressdetails=1&q={capitalCity}&format=json&limit=1";
     private final RestTemplate restTemplate;
 
-    public CoordinatesResponse getDetailsWithCoordinates(String capitalCity) {
+    public CoordinatesClientResponse getDetailsWithCoordinates(String capitalCity) {
         String url = API_URL.replace("{capitalCity}", capitalCity);
-        ResponseEntity<List<CoordinatesResponse>> response = restTemplate.exchange(
+        ResponseEntity<List<CoordinatesClientResponse>> response = restTemplate.exchange(
                 url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
                 }
         );
 
-        List<CoordinatesResponse> responseList = response.getBody();
+        List<CoordinatesClientResponse> responseList = response.getBody();
 
         return responseList.stream()
                 .findFirst()

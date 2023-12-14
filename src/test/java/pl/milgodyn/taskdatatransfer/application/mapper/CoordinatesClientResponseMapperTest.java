@@ -6,9 +6,9 @@ import pl.milgodyn.taskdatatransfer.domain.model.Coordinates;
 
 import java.math.BigDecimal;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class CoordinatesResponseMapperTest {
+class CoordinatesClientResponseMapperTest {
 
     private CoordinatesResponseMapper coordinatesResponseMapper = Mappers.getMapper(CoordinatesResponseMapper.class);
 
