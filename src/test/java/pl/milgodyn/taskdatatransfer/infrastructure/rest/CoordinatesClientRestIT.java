@@ -6,11 +6,12 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.milgodyn.taskdatatransfer.AbstractIntegrationTest;
+import pl.milgodyn.taskdatatransfer.application.exception.CapitalCityNotFoundException;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CoordinatesClientRestIT extends AbstractIntegrationTest {
 
@@ -31,13 +32,10 @@ class CoordinatesClientRestIT extends AbstractIntegrationTest {
     void shouldThrowIllegalArgumentException_whenInvalidCapitalCityGiven() {
         // given
         String capitalCity = "-";
-
         // expect
-        assertThatIllegalArgumentException()
-                .isThrownBy(
-                        () -> coordinatesClient.getDetailsWithCoordinates(capitalCity)
-                )
-                .withMessage("Capital city was not found");
+        assertThatThrownBy(() -> coordinatesClient.getDetailsWithCoordinates(capitalCity))
+                .isInstanceOf(CapitalCityNotFoundException.class)
+                .hasMessageContaining("Capital city was not found in external database");
     }
 
     private static Stream<Arguments> provideCapitalCitiesWithCoordinateResponses() {

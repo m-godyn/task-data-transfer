@@ -36,7 +36,7 @@ class CoordinatesControllerIT extends AbstractIntegrationTest {
                                 .header(HttpHeaders.AUTHORIZATION, VALID_AUTHORIZATION_HEADER_VALUE)
                 )
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.error", is(ApiErrors.INVALID_COUNTRY_CODE.getMessage())))
+                .andExpect(jsonPath("$.error", is("Invalid or no existent country code was given")))
                 .andExpect(jsonPath("$.path", is(COORDINATES_REQUEST_PATH + invalidCountryCode)));
     }
 }
