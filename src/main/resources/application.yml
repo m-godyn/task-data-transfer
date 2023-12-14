@@ -1,3 +1,10 @@
 credentials:
   username: 'user'
   password: 'password'
+
+webservice:
+  capital-city:
+    url: 'http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?op=CapitalCity'
+    default-url: 'http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso'
+  coordinates:
+    url: 'https://nominatim.openstreetmap.org/?addressdetails=1&q={capitalCity}&format=json&limit=1'

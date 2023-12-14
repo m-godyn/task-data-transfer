@@ -13,13 +13,13 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class CoordinatesClient {
 
-    private static final String API_URL = "https://nominatim.openstreetmap.org/?addressdetails=1&q={capitalCity}&format=json&limit=1";
     private final RestTemplate restTemplate;
+    private final String url;
 
     public CoordinatesClientResponse getDetailsWithCoordinates(String capitalCity) {
-        String url = API_URL.replace("{capitalCity}", capitalCity);
+        String urlWithParameter = url.replace("{capitalCity}", capitalCity);
         ResponseEntity<List<CoordinatesClientResponse>> response = restTemplate.exchange(
-                url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+                urlWithParameter, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
                 }
         );
 
