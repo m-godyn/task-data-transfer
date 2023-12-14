@@ -1,12 +1,10 @@
 package pl.milgodyn.taskdatatransfer.infrastructure.soap;
 
-import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 @Configuration
-@AllArgsConstructor
 public class SoapConfiguration {
 
     @Bean
